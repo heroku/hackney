@@ -18,8 +18,10 @@
 connect(Host, Port, Opts) ->
 	connect(Host, Port, Opts, infinity).
 
-connect(Host, Port, Opts, Timeout) when is_list(Host), is_integer(Port),
-	(Timeout =:= infinity orelse is_integer(Timeout)) ->
+connect(Host, Port, Opts, Timeout)
+  when (is_list(Host) orelse is_tuple(Host)),
+       is_integer(Port),
+       (Timeout =:= infinity orelse is_integer(Timeout)) ->
 	gen_tcp:connect(Host, Port,
 		Opts ++ [binary, {active, false}, {packet, raw}], Timeout).
 

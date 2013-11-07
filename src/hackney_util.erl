@@ -17,6 +17,8 @@
          content_type/1]).
 
 
+is_ipv6({_, _, _, _}) ->
+    false;
 is_ipv6(Host) ->
     case inet_parse:address(Host) of
         {ok, {_, _, _, _, _, _, _, _}} ->

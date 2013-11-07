@@ -76,7 +76,8 @@ connect(Transport, Host, Port) ->
 connect(_Transport, _Host, _Port, #client{state=connected}=Client) ->
     {ok, Client};
 connect(Transport, Host, Port, #client{socket=Skt, options=Opts}=Client)
-        when is_list(Host), is_integer(Port), Skt =:= nil ->
+        when is_list(Host), is_integer(Port), Skt =:= nil;
+             is_tuple(Host), is_integer(Port), Skt =:= nil ->
 
     UseDefaultPool = use_default_pool(),
     case pool(Client) of
